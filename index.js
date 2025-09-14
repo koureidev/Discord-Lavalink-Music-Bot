@@ -20,6 +20,7 @@ const {
   LAVALINK_HOST,
   LAVALINK_PORT,
   LAVALINK_PASSWORD,
+  LAVALINK_SECURE,
   EMBED_COLOR,
   FALLBACK_THUMBNAIL_URL,
   NGROK_AUTHTOKEN,
@@ -176,9 +177,9 @@ client.lavalink = new LavalinkManager({
     {
       id: "Main Node",
       host: LAVALINK_HOST,
-      port: Number(LAVALINK_PORT),
+      port: Number(LAVALINK_PORT || 443),
       authorization: LAVALINK_PASSWORD,
-      secure: true,
+      secure: LAVALINK_SECURE === "true",
     },
   ],
   sendToShard: (guildId, payload) =>
