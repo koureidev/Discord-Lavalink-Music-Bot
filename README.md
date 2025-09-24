@@ -1,3 +1,9 @@
+[![License: 0BSD](https://img.shields.io/badge/License-0BSD-blue?style=for-the-badge)](LICENSE)
+[![Node.js 18+](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![discord.js v14](https://img.shields.io/badge/discord.js-v14-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.js.org/)
+[![Docker Ready](https://img.shields.io/badge/Docker-ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Lavalink](https://img.shields.io/badge/Lavalink-supported-FF7139?style=for-the-badge&logo=java&logoColor=white)](https://github.com/lavalink-devs/Lavalink)
+
 # 🎵 Discord Music Bot
 
 A powerful, feature-rich Discord music bot built with **Discord.js v14** and powered by **Lavalink**. Designed for high-quality audio playback, stability, and ease of use. This project provides a robust foundation for a personal or public music bot.
@@ -49,17 +55,32 @@ This project is split into two parts: the **Discord Bot** (this repository) and 
 3. **Configure environment variables:**  
    Use `.env.example` as a reference. Copy its contents to a new file named `.env` and edit it with your credentials.
 
-4. **Build and start the bot in the background:**
+4. **Slash Commands Deployment:**
+   Before using the bot for the first time (or if you updated/added a command), you must deploy its slash commands. The bot being online does not automatically register them with Discord.
+
+   To deploy commands globally (available in all servers the bot is in):
+   ```bash
+   docker compose run --rm bot npm run deploy
+   ```
+
+   If you ever need to remove all commands:
+   ```bash
+   docker compose run --rm bot npm run undeploy
+   ```
+
+   ⚠️ **Note:** Global command deployment can take a few minutes to propagate across Discord. Be patient if commands don't appear instantly.
+
+5. **Build and start the bot in the background:**
    ```bash
    docker compose up -d --build
    ```
 
-5. **Check logs:**
+6. **Check logs:**
    ```bash
    docker compose logs -f
    ```
 
-6. **Stop the bot:**
+7. **Stop the bot:**
    ```bash
    docker compose down
    ```
@@ -105,7 +126,22 @@ This project is split into two parts: the **Discord Bot** (this repository) and 
 4. **Configure environment variables:**  
    Copy `.env.example` to `.env` and edit it with your credentials.
 
-5. **Run the bot:**
+5. **Slash Commands Deployment:**
+   Before using the bot for the first time (or if you updated/added a command), you must deploy its slash commands. The bot being online does not automatically register them with Discord.
+
+   To deploy commands globally (available in all servers the bot is in):
+   ```bash
+   npm run deploy
+   ```
+
+   If you ever need to remove all commands:
+   ```bash
+   npm run undeploy
+   ```
+
+   ⚠️ **Note:** Global command deployment can take a few minutes to propagate across Discord. Be patient if commands don't appear instantly.
+
+6. **Run the bot:**
    ```bash
    npm start
    ```

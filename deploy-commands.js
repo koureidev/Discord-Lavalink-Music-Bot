@@ -3,7 +3,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 require("dotenv").config();
 
-const { BOT_TOKEN, CLIENT_ID, GUILD_ID } = process.env;
+const { BOT_TOKEN, CLIENT_ID } = process.env;
 
 const commands = [];
 const commandsPath = path.join(__dirname, "commands");
@@ -34,7 +34,7 @@ const rest = new REST({ version: "10" }).setToken(BOT_TOKEN);
     );
 
     const data = await rest.put(
-      Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+      Routes.applicationCommands(CLIENT_ID),
       { body: commands }
     );
 
