@@ -49,7 +49,7 @@ This project is split into two parts: the **Discord Bot** (this repository) and 
 2. **Clone the repository:**
    ```bash
    git clone https://github.com/koureidev/discord-lavalink-music-bot.git
-   cd discord-music
+   cd discord-lavalink-music-bot
    ```
 
 3. **Configure environment variables:**  
