@@ -9,18 +9,6 @@ services:
     container_name: discord-lavalink-music-bot
     env_file:
       - .env
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN}
-      - CLIENT_ID=${CLIENT_ID}
-      - GUILD_ID=${GUILD_ID}
-      - LAVALINK_HOST=${LAVALINK_HOST}
-      - LAVALINK_PORT=${LAVALINK_PORT:-2333}
-      - LAVALINK_PASSWORD=${LAVALINK_PASSWORD}
-      - FALLBACK_THUMBNAIL_URL=${FALLBACK_THUMBNAIL_URL}
-      - EMBED_COLOR=${EMBED_COLOR}
-      - HEARTBEAT_INTERVAL_MS=${HEARTBEAT_INTERVAL_MS}
-      - HEARTBEAT_FAIL_THRESHOLD=${HEARTBEAT_FAIL_THRESHOLD}
-      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
     ports:
       - "8080:8080" # remove if unused
     restart: unless-stopped
