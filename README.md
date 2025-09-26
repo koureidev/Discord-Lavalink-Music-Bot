@@ -35,96 +35,106 @@ This repository contains the source code for the bot itself. For the pre-configu
 
 ## 🚀 Getting Started
 
-This project is split into two parts: the **Discord Bot** (this repository) and the **Lavalink Server**. You need both running for the bot to work.
+To get the music bot running, you need two components: the **Lavalink Server** (the audio engine) and the **Discord Bot** itself. You must set them up in this order.
 
 ---
 
-### ⚡ Option A – Run with Docker (recommended)
+### ✅ Step 1: Set Up and Run the Lavalink Server
 
-1. **Install prerequisites:**  
+The bot requires a running Lavalink server to connect to. We provide a pre-configured, production-ready server that is fully automated and easy to set up.
+
+➡️ **Go to the [Lavalink Server Repository](https://github.com/koureidev/discord-lavalink-music-server) and follow the instructions there first.**
+
+Once the server is running, take note of its `host`, `port`, and `password` from its `.env` file. You will need them for the next step.
+
+---
+
+### ✅ Step 2: Set Up and Run the Discord Bot
+
+Now that your Lavalink server is running, you can set up the bot to connect to it.
+
+#### ⚡ Option A – Run with Docker (recommended)
+
+1. **Install prerequisites:**
+   * **Git** to clone the repository.
+     - [Install Git](https://git-scm.com/downloads/)
    * **Docker** and **Docker Compose** must be installed. If you install Docker Desktop, compose will already be included.
      - [Install Docker](https://docs.docker.com/get-docker/)  
-     - [Install Docker Compose](https://docs.docker.com/compose/install/)  
+     - [Install Docker Compose](https://docs.docker.com/compose/install/)
 
-2. **Clone the repository:**
-   ```bash
-   git clone https://github.com/koureidev/discord-lavalink-music-bot.git
-   cd discord-lavalink-music-bot
-   ```
+2.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/koureidev/discord-lavalink-music-bot.git
+    cd discord-lavalink-music-bot
+    ```
 
-3. **Configure environment variables:**  
-   Use `.env.example` as a reference. Copy its contents to a new file named `.env` and edit it with your credentials.
+3.  **Configure environment variables:**  
+    Copy `.env.example` to a new file named `.env`.
+    ```bash
+    cp .env.example .env
+    ```
+    Now, open `.env` in your favorite text editor. Fill in your `BOT_TOKEN` and `CLIENT_ID`, and make sure the `LAVALINK_HOST`, `LAVALINK_PORT`, and `LAVALINK_PASSWORD` match the values from your running Lavalink server (from Step 1).
 
-4. **Slash Commands Deployment:**
+4.  **Deploy Slash Commands:**
    Before using the bot for the first time (or if you updated/added a command), you must deploy its slash commands. The bot being online does not automatically register them with Discord.
 
-   To deploy commands globally (available in all servers the bot is in):
-   ```bash
-   docker compose run --rm bot npm run deploy
-   ```
+    To deploy commands globally (available in all servers the bot is in):
+    ```bash
+    docker compose run --rm bot npm run deploy
+    ```
 
-   If you ever need to remove all commands:
-   ```bash
-   docker compose run --rm bot npm run undeploy
-   ```
+    If you ever need to remove all commands:
+    ```bash
+    docker compose run --rm bot npm run undeploy
+    ```
 
-   ⚠️ **Note:** Global command deployment can take a few minutes to propagate across Discord. Be patient if commands don't appear instantly.
+    ⚠️ **Note:** Global command deployment can take a few minutes to propagate across Discord. Be patient if commands don't appear instantly.
 
-5. **Build and start the bot in the background:**
-   ```bash
-   docker compose up -d --build
-   ```
-
-6. **Check logs:**
-   ```bash
-   docker compose logs -f
-   ```
-
-7. **Stop the bot:**
-   ```bash
-   docker compose down
-   ```
+5.  **Build and start the bot:**
+    ```bash
+    docker compose up -d --build
+    ```
 
 ---
 
-### ⚡ Option B – Run locally (manual setup)
+#### ⚡ Option B – Run locally (manual setup)
 
 1. **Install prerequisites:**  
    * **Node.js v18+**
    * **npm v11+**
-     - [Node.js v18+](https://nodejs.org/en/download)
      - Linux (Debian/Ubuntu):  
        ```bash
-       curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-       sudo apt-get install -y nodejs
+       sudo apt-get install nodejs npm git
        npm install -g npm
        ```  
      - Linux (Fedora/CentOS/Rocky):  
        ```bash
-       curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash -
-       sudo dnf install -y nodejs
+       sudo dnf install nodejs npm git
        npm install -g npm
        ```
        or
        ```bash
-       curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash -
-       sudo yum install -y nodejs
+       sudo yum install nodejs npm git
        npm install -g npm
        ```
 
-2. **Clone the repository:**
-   ```bash
-   git clone https://github.com/koureidev/discord-lavalink-music-bot.git
-   cd discord-music
-   ```
+2.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/koureidev/discord-lavalink-music-bot.git
+    cd discord-lavalink-music-bot
+    ```
 
 3. **Install dependencies:**
    ```bash
    npm install
    ```
 
-4. **Configure environment variables:**  
-   Copy `.env.example` to `.env` and edit it with your credentials.
+4.  **Configure environment variables:**  
+    Copy `.env.example` to `.env`.
+    ```bash
+    cp .env.example .env
+    ```
+    Now, open `.env` in your favorite text editor. Fill in your `BOT_TOKEN` and `CLIENT_ID`, and make sure the `LAVALINK_HOST`, `LAVALINK_PORT`, and `LAVALINK_PASSWORD` match the values from your running Lavalink server (from Step 1).
 
 5. **Slash Commands Deployment:**
    Before using the bot for the first time (or if you updated/added a command), you must deploy its slash commands. The bot being online does not automatically register them with Discord.
@@ -141,45 +151,10 @@ This project is split into two parts: the **Discord Bot** (this repository) and 
 
    ⚠️ **Note:** Global command deployment can take a few minutes to propagate across Discord. Be patient if commands don't appear instantly.
 
-6. **Run the bot:**
+7. **Run the bot:**
    ```bash
    npm start
    ```
-
-### 2. Setting Up the Lavalink Server
-
-For the bot to play music, it needs to connect to a Lavalink server. We provide a pre-configured, production-ready server at [koureidev/discord-lavalink-music-server](https://github.com/koureidev/discord-lavalink-music-server). Follow the instructions there to get it running.
-
-The following environment variables need to be configured for your **Lavalink server instance**:
-
-#### Basic Configuration
-
-* `LAVALINK_PASSWORD`: Must match the password in the bot's `.env` file.
-
-#### YouTube Plugin Configuration (OAuth)
-
-For YouTube playback (youtube-plugin), you will need:
-
-* `YOUTUBE_CLIENT_ID`
-* `YOUTUBE_CLIENT_SECRET`
-* `YOUTUBE_REFRESH_TOKEN`
-
-#### YouTube POT Token (Optional)
-
-This project has optional support for additional YouTube tokens. These are not officially supported by YouTube. **We do not provide instructions** for acquiring them.
-
-If you have them, set:
-
-* `POT_TOKEN`
-* `POT_VISITOR_DATA`
-
-#### Spotify Plugin Configuration (Lavasrc)
-
-For Spotify link support, obtain:
-
-* `SPOTIFY_CLIENT_ID`
-* `SPOTIFY_CLIENT_SECRET`
-* `SPOTIFY_COUNTRY` (your two-letter ISO country code, e.g., `US`, `JP`, `DE`).
 
 ---
 
